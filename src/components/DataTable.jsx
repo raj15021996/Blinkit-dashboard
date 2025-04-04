@@ -82,7 +82,7 @@ const DynamicTable = ({ data, tableTitle, description }) => {
           <Typography variant="h6">{tableTitle}</Typography>
           <Typography variant="body2">{description}</Typography>
         </div>
-        <Button variant="contained" color="success">Filters</Button>
+        <Button variant="contained" className='filter-btn'>Filters</Button>
       </div>
       <TableContainer component={Paper}>
         <Table>

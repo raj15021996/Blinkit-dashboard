@@ -49,10 +49,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.chart-heading{
+.chart-heading {
   display: flex;
   justify-content: space-between;
 }
+
 .chart-value {
   font-family: Mulish;
   font-weight: 700;
@@ -168,7 +169,7 @@
   font-size: 18px;
   line-height: 20px;
   letter-spacing: -0.26px;
-  vertical-align: middle;  
+  vertical-align: middle;
 }
 
 .total-change {
@@ -195,6 +196,7 @@
   display: grid;
   grid-template-columns: 180px 1fr 1fr 60px;
   gap: 5px;
+  font-size: 13px !important;
 }
 
 .city-content {
@@ -210,14 +212,18 @@
   border-radius: 50%;
 }
 
-.city-name {
-  font-size: 14px;
-}
-
 .city-value,
 .city-percentage {
-  font-size: 14px;
   text-align: center;
+}
+
+.city-value {
+  font-family: Mulish;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.26px;
+  vertical-align: middle;
+  color: #000000;
 }
 
 .city-per-value {
@@ -246,7 +252,7 @@
   margin-right: 8px;
 }
 
-.filter-btn{
+.filter-btn {
   font-size: 14px !important;
   padding: 2px 25px;
   height: 40px;
