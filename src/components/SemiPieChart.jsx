@@ -8,8 +8,10 @@ import {
   Legend,
 } from "recharts";
 import "./dashboard.css";
+import info from "@/assets/info.svg";
+import Image from "next/image";
 
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300"]; // Adjust these colors as needed
+const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300"]; 
 
 const SemiPieChart = ({ data, title, total, percentageChange }) => {
   // Helper function to format the value with currency
@@ -23,7 +25,11 @@ const SemiPieChart = ({ data, title, total, percentageChange }) => {
 
   return (
     <div className="piechart-card">
-      <h3 className="piechart-title">{title}</h3>
+     <div className="chart-heading">
+          <h3 className="piechart-title">{title}</h3>
+          <Image src={info} alt="info" className="menu-icon" />
+     </div>
+      {/* <h3 className="piechart-title">{title}</h3> */}
       <div className="piechart-container">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -68,16 +74,17 @@ const SemiPieChart = ({ data, title, total, percentageChange }) => {
                     className="city-color"
                     style={{ backgroundColor: COLORS[index % COLORS.length] }}
                   ></div>
-                  <span className="city-name">{item.name}</span>
+                  <span className="city-name">{item?.name}</span>
                 </div>
-                <div className="city-value">{formatCurrency(item.value)}</div>
+                <div className="city-value">{formatCurrency(item?.value)}</div>
+                <div className="city-per-value">{(item?.percentageValue)}%</div>
                 <div
                   className="city-percentage"
                   style={{
                     color: item.percentageChange >= 0 ? "green" : "red",
                   }}
                 >
-                  {formatPercentage(item.percentageChange)}
+                  {formatPercentage(item?.percentageChange)}
                 </div>
               </div>
             ))}

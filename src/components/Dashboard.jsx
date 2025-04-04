@@ -19,10 +19,10 @@ const sampleData = {
         { day: 15, "This Month": 5.2, "Last Month": 4.1 },
       ],
     pieChartData: [
-        { name: 'New Delhi', value: 26.5, percentageChange: 1.2 },
-        { name: 'Mumbai', value: 36.4, percentageChange: -3.3 },
-        { name: 'West Bengal', value: 12.2, percentageChange: -2.3 },
-        { name: 'Others', value: 24.3, percentageChange: 1.09 },
+        { name: 'New Delhi', value: 26.5, percentageChange: 1.2, percentageValue: 35 },
+        { name: 'Mumbai', value: 36.4, percentageChange: -3.3, percentageValue: 23 },
+        { name: 'West Bengal', value: 12.2, percentageChange: -2.3, percentageValue: 21 },
+        { name: 'Others', value: 24.3, percentageChange: 1.09, percentageValue: 9 },
     ],
     tableData: [
       {
@@ -107,13 +107,13 @@ const Dashboard = () => {
         <DynamicTable
           data={tableData.skuData}
           tableTitle="SKU level data"
-          description="Analytics for all your SKUs 📦"
+          description="Analytics for all your SKUs"
         />
 
         <DynamicTable
           data={tableData.cityData}
           tableTitle="City level data"
-          description="Analytics for all your Cities 🗺️"
+          description="Analytics for all your Cities"
         />
         </div>
       </div>

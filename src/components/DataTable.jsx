@@ -17,6 +17,7 @@ const DynamicTable = ({ data, tableTitle, description }) => {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('skuName');
   const [filter, setFilter] = useState('');
+  const [selectAll, setSelectAll] = useState(false);
 
   const handleSelectRow = (skuName) => {
     const selectedIndex = selectedRows.indexOf(skuName);
@@ -33,28 +34,31 @@ const DynamicTable = ({ data, tableTitle, description }) => {
     setSelectedRows(newSelectedRows);
   };
 
+  const handleSelectAllClick = () => {
+    if (!selectAll) {
+      setSelectedRows(data.map((row) => row.skuName));
+    } else {
+      setSelectedRows([]);
+    }
+    setSelectAll(!selectAll);
+  };
+
   const handleSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
+  const formatColumnKey = (key) => key.toLowerCase().replace(/\s+/g, '');
+
   const sortData = (array) => {
     return array.sort((a, b) => {
       if (orderBy === 'skuName') {
-        if (order === 'asc') {
-          return a.skuName?.localeCompare(b.skuName ?? '') ?? 0;
-        } else {
-          return b.skuName?.localeCompare(a.skuName ?? '') ?? 0;
-        }
+        return order === 'asc' ? a.skuName.localeCompare(b.skuName) : b.skuName.localeCompare(a.skuName);
       } else if (orderBy === 'sales') {
-        if (order === 'asc') {
-          return (parseFloat(a.sales?.replace('₹', '').replace(',', '') ?? 0) -
-            parseFloat(b.sales?.replace('₹', '').replace(',', '') ?? 0)) ?? 0;
-        } else {
-          return (parseFloat(b.sales?.replace('₹', '').replace(',', '') ?? 0) -
-            parseFloat(a.sales?.replace('₹', '').replace(',', '') ?? 0)) ?? 0;
-        }
+        return order === 'asc'
+          ? parseFloat(a.sales.replace('₹', '').replace(',', '')) - parseFloat(b.sales.replace('₹', '').replace(',', ''))
+          : parseFloat(b.sales.replace('₹', '').replace(',', '')) - parseFloat(a.sales.replace('₹', '').replace(',', ''));
       }
       return 0;
     });
@@ -63,6 +67,10 @@ const DynamicTable = ({ data, tableTitle, description }) => {
   const formatCurrency = (value) => {
     const valueString = value?.toString() ?? '0';
     return `₹${parseFloat(valueString.replace('₹', '').replace(',', '')).toFixed(1)}L`;
+  };
+
+  const sumColumn = (key) => {
+    return data.reduce((total, row) => total + (parseFloat(row[key]?.toString().replace('₹', '').replace(',', '') ?? 0) || 0), 0);
   };
 
   const sortedData = sortData(data);
@@ -80,16 +88,21 @@ const DynamicTable = ({ data, tableTitle, description }) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>
-                <Checkbox />
+              <TableCell rowSpan={2}>
+               {""}
               </TableCell>
-              {['SKU Name', 'Sales', 'Out of Stock', 'Total Inventory', 'Average Rank', 'Est. Traffic', 'Est. Impressions'].map(
+              <TableCell rowSpan={2} style={{ borderRight: '1px solid #ddd' }}>SKU Name</TableCell>
+              <TableCell colSpan={3} align="center" style={{ borderRight: '1px solid #ddd' }}>Availability</TableCell>
+              <TableCell colSpan={3} align="center">Visibility</TableCell>
+            </TableRow>
+            <TableRow>
+              {['Sales', 'Out of Stock', 'Total Inventory', 'Average Rank', 'Est. Traffic', 'Est. Impressions'].map(
                 (header, index) => (
-                  <TableCell key={index}>
+                  <TableCell key={index} style={{ borderRight: index === 2 ? '1px solid #ddd' : 'none' }}>
                     <TableSortLabel
-                      active={orderBy === header.toLowerCase().replace(' ', '')}
-                      direction={orderBy === header.toLowerCase().replace(' ', '') ? order : 'asc'}
-                      onClick={() => handleSort(header.toLowerCase().replace(' ', ''))}
+                      active={orderBy === formatColumnKey(header)}
+                      direction={orderBy === formatColumnKey(header) ? order : 'asc'}
+                      onClick={() => handleSort(formatColumnKey(header))}
                     >
                       {header}
                     </TableSortLabel>
@@ -109,29 +122,31 @@ const DynamicTable = ({ data, tableTitle, description }) => {
                   backgroundColor: selectedRows.indexOf(row.skuName) !== -1 ? '#e0f7fa' : 'transparent',
                 }}
               >
-                <TableCell>
-                  <Checkbox />
+                <TableCell style={{ borderRight: '1px solid #ddd' }}>
+                  <Checkbox checked={selectedRows.includes(row.skuName)} onChange={() => handleSelectRow(row.skuName)} />
                 </TableCell>
-                <TableCell>{row.skuName}</TableCell>
+                <TableCell style={{ borderRight: '1px solid #ddd' }}>{row.skuName}</TableCell>
                 <TableCell>{row.sales}</TableCell>
                 <TableCell>{row.outOfStock}</TableCell>
-                <TableCell>{row.totalInventory}</TableCell>
+                <TableCell style={{ borderRight: '1px solid #ddd' }}>{row.totalInventory}</TableCell>
                 <TableCell>{row.avgRank}</TableCell>
                 <TableCell>{row.estTraffic}</TableCell>
                 <TableCell>{row.estImpressions}</TableCell>
               </TableRow>
             ))}
+            <TableRow style={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' }}>
+              <TableCell>Total</TableCell>
+              <TableCell></TableCell>
+              <TableCell>{formatCurrency(sumColumn('sales'))}</TableCell>
+              <TableCell>{sumColumn('outOfStock')}</TableCell>
+              <TableCell>{sumColumn('totalInventory')}</TableCell>
+              <TableCell>{sumColumn('avgRank')}</TableCell>
+              <TableCell>{sumColumn('estTraffic')}</TableCell>
+              <TableCell>{sumColumn('estImpressions')}</TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
-      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
-        <div style={{ fontWeight: 'bold' }}>Total</div>
-        <div style={{ fontWeight: 'bold' }}>
-          {formatCurrency(
-            sortedData.reduce((total, row) => total + parseFloat(row.sales?.replace('₹', '').replace(',', '') ?? 0), 0)
-          )}
-        </div>
-      </div>
     </div>
   );
 };

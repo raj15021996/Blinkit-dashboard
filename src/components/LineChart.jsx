@@ -1,5 +1,6 @@
 import React from "react";
 import { useCubeQuery } from '@cubejs-client/react';
+import info from "@/assets/info.svg";
 import {
   Line,
   XAxis,
@@ -10,37 +11,41 @@ import {
   ComposedChart,
   Area,
 } from "recharts";
+import Image from "next/image";
 
 const LineChart = ({ title, query, data }) => {
-  const query1 = query?.[0] || {}; 
-  const query2 = query?.[1] || {}; 
+  // const query1 = query?.[0] || {}; 
+  // const query2 = query?.[1] || {}; 
 
-  const { resultSet: resultSet1, isLoading: isLoading1, error: error1 } = useCubeQuery({
-    query: query1,
-  });
+  // const { resultSet: resultSet1, isLoading: isLoading1, error: error1 } = useCubeQuery({
+  //   query: query1,
+  // });
 
-  const { resultSet: resultSet2, isLoading: isLoading2, error: error2 } = useCubeQuery({
-    query: query2,
-  });
+  // const { resultSet: resultSet2, isLoading: isLoading2, error: error2 } = useCubeQuery({
+  //   query: query2,
+  // });
 
-  if (error1 || error2) return <div>Error: {error1 ? error1.message : error2.message}</div>;
+  // if (error1 || error2) return <div>Error: {error1 ? error1.message : error2.message}</div>;
 
-  const dataProcessed1 = resultSet1 ? resultSet1.chartPivot() : [];
-  const dataProcessed2 = resultSet2 ? resultSet2.chartPivot() : [];
+  // const dataProcessed1 = resultSet1 ? resultSet1.chartPivot() : [];
+  // const dataProcessed2 = resultSet2 ? resultSet2.chartPivot() : [];
 
-  const combinedData = dataProcessed1.map((item, index) => ({
-    ...item,
-    lastMonth: dataProcessed2[index] ? dataProcessed2[index].lastMonth : null,
-  }));
+  // const combinedData = dataProcessed1.map((item, index) => ({
+  //   ...item,
+  //   lastMonth: dataProcessed2[index] ? dataProcessed2[index].lastMonth : null,
+  // }));
 
   return (
     <div className="chart-container">
+     <div className="chart-heading">
       <h3>{title}</h3>
+      <Image src={info} alt="info" className="menu-icon" />
+     </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <span className="chart-value">125.49</span>
         <span><span className="chart-perc" >+2.4%</span> <br/> vs 119.69 last month</span>
       </div>
-      <ResponsiveContainer width="100%" height="60%">
+      <ResponsiveContainer width="100%" height="65%">
         <ComposedChart data={data}>
           <CartesianGrid vertical={false} horizontal={true} stroke="#ccc" strokeOpacity={0.5} />
           <XAxis dataKey="day" axisLine={false} />

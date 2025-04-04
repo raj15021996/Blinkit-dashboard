@@ -11,9 +11,11 @@
   width: 75%;
   padding: 2rem;
 }
-.inner-dashboard{
+
+.inner-dashboard {
   padding: 20px;
 }
+
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -47,6 +49,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.chart-heading{
+  display: flex;
+  justify-content: space-between;
+}
 .chart-value {
   font-family: Mulish;
   font-weight: 700;
@@ -55,6 +61,7 @@
   letter-spacing: -0.26px;
   vertical-align: middle;
 }
+
 .chart-perc {
   font-family: Mulish;
   font-weight: 700;
@@ -64,24 +71,33 @@
   vertical-align: middle;
   color: #1d874f;
 }
+
 .chart-container h3 {
   font-size: 18px;
-  color: #333;
   margin-bottom: 10px;
+  font-family: Mulish;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.26px;
+  vertical-align: middle;
+  color: #515153;
 }
 
 .chart-container h4 {
   font-size: 14px;
-  color: #4caf50; /* Green color for percentage */
+  color: #4caf50;
+  /* Green color for percentage */
 }
 
 .chart-container .recharts-wrapper {
-  border-radius: 10px; /* Ensure the chart itself also has rounded corners */
+  border-radius: 10px;
+  /* Ensure the chart itself also has rounded corners */
 }
 
 .custom-legend {
   display: flex;
-  
+
   margin: 10px 0px 0px 10px;
   align-items: center;
   height: 16px;
@@ -90,21 +106,22 @@
 .legend-item {
   display: flex;
   align-items: center;
-  margin-right: 20px; /* Adjust spacing between legend items if needed */
+  margin-right: 20px;
+  /* Adjust spacing between legend items if needed */
 }
 
 .legend-color-box {
   width: 15px;
   height: 15px;
   margin-right: 5px;
-  border-radius: 50%; /* Optional: adds rounded corners to the color boxes */
+  border-radius: 50%;
+  /* Optional: adds rounded corners to the color boxes */
 }
 
 .legend-text {
   font-size: 14px;
 }
 
-/* Last legend item should not have margin on the right */
 .legend-item:last-child {
   margin-right: 0;
 }
@@ -112,13 +129,19 @@
 .piechart-card {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px 20px 86px 20px;
+  padding: 10px 10px 86px 10px;
   background-color: white;
 }
 
 .piechart-title {
-  font-size: 18px;
   margin-bottom: 20px;
+  font-family: Mulish;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.26px;
+  vertical-align: middle;
+  color: #515153;
 }
 
 .piechart-container {
@@ -140,8 +163,12 @@
 }
 
 .total-value {
-  font-size: 24px;
-  font-weight: bold;
+  font-family: Mulish;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: -0.26px;
+  vertical-align: middle;  
 }
 
 .total-change {
@@ -155,12 +182,18 @@
   width: 100%;
   position: absolute;
   top: 70%;
+  color: #7D7D7E;
+  font-family: Mulish;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: -0.26px;
+  vertical-align: middle;
 }
 
 .city-item {
   display: grid;
-  grid-template-columns: 40px 1fr 80px; /* Adjust column widths */
-  align-items: center;
+  grid-template-columns: 180px 1fr 1fr 60px;
   gap: 10px;
 }
 
@@ -187,10 +220,23 @@
   text-align: center;
 }
 
+.city-per-value {
+  font-size: 14px;
+  text-align: center;
+  color: #7D7D7E;
+}
+
 .legend-item {
   display: flex;
   align-items: center;
   margin-left: 15px;
+  color: #7D7D7E;
+  font-family: Mulish;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: -0.26px;
+  vertical-align: middle;
 }
 
 .legend-item div {
@@ -198,4 +244,12 @@
   height: 15px;
   border-radius: 50%;
   margin-right: 8px;
+}
+
+.filter-btn{
+  font-size: 14px !important;
+  padding: 2px 25px;
+  height: 40px;
+  text-transform: capitalize;
+  background: #027056 !important;
 }
