@@ -1,0 +1,201 @@
+.dashboard-container {
+  min-height: 100vh;
+  width: 100%;
+  background: #fafafa;
+  display: flex;
+  border: 1px solid #ebebeb;
+}
+
+.dashboard-content {
+  /* max-width: 80rem; */
+  width: 75%;
+  padding: 2rem;
+}
+.inner-dashboard{
+  padding: 20px;
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.datatable-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.datatable-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.datatable-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.chart-container {
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart-value {
+  font-family: Mulish;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.26px;
+  vertical-align: middle;
+}
+.chart-perc {
+  font-family: Mulish;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 16px;
+  letter-spacing: -0.26px;
+  vertical-align: middle;
+  color: #1d874f;
+}
+.chart-container h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.chart-container h4 {
+  font-size: 14px;
+  color: #4caf50; /* Green color for percentage */
+}
+
+.chart-container .recharts-wrapper {
+  border-radius: 10px; /* Ensure the chart itself also has rounded corners */
+}
+
+.custom-legend {
+  display: flex;
+  
+  margin: 10px 0px 0px 10px;
+  align-items: center;
+  height: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Adjust spacing between legend items if needed */
+}
+
+.legend-color-box {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border-radius: 50%; /* Optional: adds rounded corners to the color boxes */
+}
+
+.legend-text {
+  font-size: 14px;
+}
+
+/* Last legend item should not have margin on the right */
+.legend-item:last-child {
+  margin-right: 0;
+}
+
+.piechart-card {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px 20px 86px 20px;
+  background-color: white;
+}
+
+.piechart-title {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.piechart-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+
+.semi-pie-chart-info {
+  margin-top: 20px;
+}
+
+.total {
+  text-align: center;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 25%;
+  left: 40%;
+}
+
+.total-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.total-change {
+  font-size: 14px;
+}
+
+.city-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+  position: absolute;
+  top: 70%;
+}
+
+.city-item {
+  display: grid;
+  grid-template-columns: 40px 1fr 80px; /* Adjust column widths */
+  align-items: center;
+  gap: 10px;
+}
+
+.city-content {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100px;
+}
+
+.city-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.city-name {
+  font-size: 14px;
+}
+
+.city-value,
+.city-percentage {
+  font-size: 14px;
+  text-align: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.legend-item div {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
