@@ -194,7 +194,7 @@
 .city-item {
   display: grid;
   grid-template-columns: 180px 1fr 1fr 60px;
-  gap: 10px;
+  gap: 5px;
 }
 
 .city-content {
